@@ -1,0 +1,25 @@
+{
+  "name": "alexa-gas-finder",
+  "version": "1.0.0",
+  "description": "Alexa skill to find gas stations around you",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lzmartinico/alexa-gas-finder.git"
+  },
+  "keywords": [
+    "alexa"
+  ],
+  "author": "Lorenzo Martinico",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/lzmartinico/alexa-gas-finder/issues"
+  },
+  "homepage": "https://github.com/lzmartinico/alexa-gas-finder#readme",
+  "dependencies": {
+    "alexa-sdk": "^1.0.11"
+  }
+}
