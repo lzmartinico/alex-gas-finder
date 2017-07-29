@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/lzmartinico/alexa-gas-finder#readme",
   "dependencies": {
-    "alexa-sdk": "^1.0.11"
+    "alexa-sdk": "^1.0.11",
+    "http": "0.0.0"
   }
 }
