@@ -44,7 +44,7 @@ const CLOSEST_STATION_FOUND = "The closest gas station to your device location i
 
 const CLOSEST_STATION_CARD_TITLE = "Your closest gas station: "
 
-const CHEAPEST_STATION_FOUND = "The cheapest gas station within a 5 mile radius to your device location is"
+const CHEAPEST_STATION_FOUND = "The cheapest gas station within a 5 mile radius to your device location is "
 
 const CHEAPEST_STATION_CARD_TITLE = "Cheapest gas station: "
 
@@ -192,7 +192,10 @@ const findCheapestHandler = function() {
             console.log("stations are " + stations)
             let best = stations[0];
             if (best) {
-                let message = Messages.CHEAPEST_STATION_FOUND + best.station + " at address " + best.address + " for " + best.reg_price + " dollars" // TODO: change price
+                let message = Messages.CHEAPEST_STATION_FOUND + best.station + " at address " + best.address
+                if (best.reg_price != "N/A") {
+                    message = message + " for " + best.reg_price + " dollars" // TODO: change price
+                }
                 this.emit(":tellWithCard", message, Messages.CHEAPEST_STATION_CARD_TITLE + best.station + "($" + best.reg_price + ")", best.address) //TODO: add price based on user choice
             } else {
                 this.emit(":tell", Messages.COORDINATE_FAILURE)
@@ -203,7 +206,7 @@ const findCheapestHandler = function() {
 
 
 const newSessionHandler = function() {
-    this.emit(":tell", Messages.WELCOME);
+    this.emit(":ask", Messages.WELCOME);
 }
 
 const unhandledRequestHandler = function() {
@@ -223,7 +226,8 @@ exports.handler = (event, context, callback) => {
     alexa.registerHandlers({
         'FindClosestStation': findClosestHandler,
         'FindCheapestStation': findCheapestHandler,
-        'Unhandled': newSessionHandler
+        'LaunchRequest': newSessionHandler,
+        'Unhandled': unhandledRequestHandler
     });
     
     alexa.execute();
