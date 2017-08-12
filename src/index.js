@@ -48,6 +48,8 @@ const CHEAPEST_STATION_FOUND = "The cheapest gas station within a 5 mile radius 
 
 const CHEAPEST_STATION_CARD_TITLE = "Cheapest gas station: "
 
+const HELP_MESSAGE = "You can ask me what the closest gas station is, or to give you the cheapest gas prices.";
+
 const Messages = {
     "WELCOME": WELCOME,
     "NOTIFY_MISSING_PERMISSIONS": NOTIFY_MISSING_PERMISSIONS,
@@ -61,8 +63,8 @@ const Messages = {
     "CLOSEST_STATION_FOUND": CLOSEST_STATION_FOUND,
     "CHEAPEST_STATION_FOUND": CHEAPEST_STATION_FOUND,
     "CHEAPEST_STATION_CARD_TITLE": CHEAPEST_STATION_CARD_TITLE,
-    "CLOSEST_STATION_CARD_TITLE": CLOSEST_STATION_CARD_TITLE 
-   // "HELP": HELP,
+    "CLOSEST_STATION_CARD_TITLE": CLOSEST_STATION_CARD_TITLE,
+    "HELP": HELP_MESSAGE,
    // "STOP": STOP
 };
 
@@ -204,6 +206,13 @@ const findCheapestHandler = function() {
    }); 
 }
 
+const helpHandler = function() {
+    this.emit(":ask", Messages.HELP);
+}
+
+const cancelHandler = function() {
+    this.emit(":tell", Messages.GOODBYE);
+}
 
 const newSessionHandler = function() {
     this.emit(":ask", Messages.WELCOME);
@@ -227,6 +236,9 @@ exports.handler = (event, context, callback) => {
         'FindClosestStation': findClosestHandler,
         'FindCheapestStation': findCheapestHandler,
         'LaunchRequest': newSessionHandler,
+        'AMAZON.HelpIntent': helpHandler,
+        'AMAZON.StopIntent': cancelHandler,
+        'AMAZON.CancelIntent': cancelHandler,
         'Unhandled': unhandledRequestHandler
     });
     
